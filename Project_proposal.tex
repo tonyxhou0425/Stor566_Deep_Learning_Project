@@ -73,20 +73,16 @@ attention employed by DeiT-Small for the selected classification task.
 
 \section*{Proposed Work}
 \setlength{\emergencystretch}{2em}
-Inspired by these architectural developments, our project aims to compare pretrained ResNet-50, \mbox{EfficientNet-B0}, DeiT-Small, and Swin-Tiny
-in classification performance and computational efficiency on the brain tumor dataset. We will explore the strengths and limitations of
-models and identify trade-offs between predictive performance and computational cost. Although these foundational studies demonstrate
-the models' capabilities on general image recognition tasks, their relative performance on the MRI dataset remains unknown. In our
-experiment, ResNet-50 and EfficientNet-B0 represent convolutional architectures, while DeiT-Small and Swin-Tiny each represent global and
-hierarchical attention-based architectures. All models will be initialized using ImageNet-1K-pretrained weights and fine-tuned on the
-selected MRI dataset. The standard, non-distilled DeiT-Small configuration will be used. The original classification layer of each pretrained
-model will be replaced with a new layer containing 4 output units, corresponding to glioma, meningioma, pituitary tumor, and no tumor.
+We will compare ImageNet-1K-pretrained ResNet-50, \mbox{EfficientNet-B0}, DeiT-Small, and Swin-Tiny in classification performance and computational efficiency, 
+using the standard, non-distilled DeiT-Small configuration. After replacing each model's classification head with a four-output layer, we will fine-tune all
+parameters. For a consistent comparison, all models will share identical data partitions, retaining the dataset's test partition and reserving approximately 20\%
+of the training data for validation while preserving class proportions. Exact duplicate content will be checked and handled to prevent overlap across partitions.
+Preprocessing will produce three-channel, \(224 \times 224\) images with normalization appropriate to each pretrained checkpoint. Only training images will 
+receive augmentation through a common policy of mild rotations, translations, and scaling.
 
-Images will be resized to \(224 \times 224\) pixels and represented using three input channels. Normalization will follow the requirements
-of each pretrained model. An augmentation policy of rotations, translations, and zoom transformations will be applied to training images.
-We will use the dataset's existing training and test sets as the initial split, reserving 20\% of the training images for validation while
-preserving class proportions. Duplicate images across sets will be checked before training. All models will use identical data splits,
-the same number of hyperparameter trials, and three fixed random seeds.
+Each architecture will receive the same number of hyperparameter trials and follow a common epoch cap and early-stopping rule. Hyperparameters and checkpoints 
+will be selected using validation macro-F1. The final configurations will be evaluated across three fixed random seeds, with test evaluation conducted after model
+selection is complete. 
 
 \section*{Evaluation Metric}
 Model performance will be evaluated on the held-out test set after hyperparameters and training checkpoints have been selected using the
