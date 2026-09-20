@@ -37,16 +37,18 @@
 \begin{document}
 \maketitle
 \section*{Problem Description}
-Brain tumors are an abnormal growth of cells in the brain that can be indicative of several severe underlying illnesses and have an array of serious 
-symptoms such as headaches, vision issues, speech issues, etc. Magnetic Resonance Imaging (MRI) is a significant part of the diagnostic process. 
-It produces 3D images of the brain and can help identify and diagnose brain tumors. The early identification of these brain tumors can have a "direct 
-impact not only on the patient's estimated survival but also on treatment planning and tumor growth evaluation" \citet{mzoughi2020}. Automated classification of brain 
-MRI images is a challenging image recognition task that requires classification between categories with similar visual 
-characteristics. Variations in tumor appearance and image quality can make accurate classification challenging. In terms of predictive accuracy, 
-computational requirements are an important consideration when selecting an appropriate deep learning model. These factors motivate a systematic 
-comparison of architectures with different approaches to how they extract and combine image features. This project addresses the classification of 
-two-dimensional brain MRI images into four categories: glioma, meningioma, pituitary tumor, and no tumor, using the 
-\href{https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset}{Brain Tumor MRI Dataset} containing 7,200 images.
+Automated classification of two-dimensional brain MRI images is a challenging image-recognition task because different tumor categories can share visual
+characteristics, while images vary in appearance and quality. Convolutional neural networks (CNNs) and vision transformers offer different approaches to
+extracting image features. Evaluating these approaches requires considering both classification performance and computational cost, since improvements
+in predictive performance may involve larger models or longer training and inference times.
+
+This project investigates the classification of brain MRI images into four categories: glioma, meningioma, pituitary tumor, and no tumor. We will use
+version 2 of the publicly available \href{https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset}{Brain Tumor MRI Dataset}, which contains 7,200 
+images, to compare selected ImageNet-1K-pretrained CNN and vision transformer models under a shared experimental protocol. Our central question is how these 
+models differ in classification performance, model size, training time, and inference latency when evaluated using the same audited data partitions. The study will
+provide a reproducible comparison on this image benchmark. Because patient identifiers are unavailable, its findings will not establish performance on
+independent patients or clinical populations.
+
 
 \section*{Related Work}
 Convolutional neural networks (CNNs) are widely used for image classification due to their capacity to learn hierarchical visual representations.
