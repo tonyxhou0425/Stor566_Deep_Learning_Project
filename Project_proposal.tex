@@ -51,27 +51,25 @@ independent patients or clinical populations.
 
 
 \section*{Related Work}
-Convolutional neural networks (CNNs) are widely used for image classification due to their capacity to learn hierarchical visual representations.
-Recent studies have shown that deep learning has achieved strong performance in brain tumor classification using MRI images. 
-\citet{mzoughi2020} proposed a multi-scale 3D convolutional neural network that uses volumetric MRI data to classify glioma tumors. 
-Their work demonstrated that 3D CNNs can effectively capture spatial information across MRI slices, but they also require more computational 
-resources. 
+\citet{mzoughi2020} developed a multi-scale 3D CNN for distinguishing low- and high-grade gliomas from volumetric T1-Gado MRI and examined preprocessing and 
+augmentation effects. This differs from our four-class task, which classifies individual 2D images as glioma, meningioma, pituitary tumor, or no tumor. The study 
+therefore provides CNN-based brain-MRI background but does not establish expected performance for our setting.
 
-\citet{he2016} introduced residual learning,
-which facilitates the optimization of deep networks through shortcut connections. This framework provides the foundation for ResNet-50,
-selected in the present study as an established CNN baseline. \citet{tan2019} proposed EfficientNet, a family of architectures developed by
-balancing network depth, width, and input resolution. EfficientNet-B0, one model of the family, is introduced to examine the trade-off between 
-classification performanceand computational cost within a compact convolutional architecture.
+Residual learning and efficient scaling motivate the CNN comparators. \citet{he2016} introduced residual functions and shortcut-based optimization for deep 
+networks, forming the foundation of the ResNet family. \citet{tan2019} proposed EfficientNet's compound scaling of depth, width, and input resolution, with 
+EfficientNet-B0 as its baseline. These models provide complementary CNN comparators for classification performance and computational cost. For transformer 
+comparators, \citet{touvron2021} demonstrated data-efficient DeiT training on ImageNet without additional external data, while \citet{liu2021} introduced Swin's 
+hierarchical representations and shifted-window attention. These designs motivate evaluating DeiT-Small and Swin-Tiny.
 
-Transformer architectures offer another approach to image classification by using attention to model relationships between image patches.
-\citet{touvron2021} introduced Data-Efficient Image Transformers (DeiT), which shows competitive image classification performance through
-training on ImageNet without additional external training data. Pretrained DeiT-Small is included to investigate performance of a vision
-Transformer as an alternative to convolutional feature extraction for brain MRI classification tasks.
+\citet{reddy2024} compared fine-tuned vision transformers with ResNet-50 and EfficientNet-B0 using 7,023 MRI images across the four target classes. 
+\citet{cakmak2025} compared eleven ViT-, DeiT-, and Swin-family models, including DeiT-Small and Swin-Tiny, on a separate 5,249-image dataset while measuring 
+predictive performance and computational cost. Differences in datasets and experimental procedures prevent these findings from establishing an expected
+ranking on our version-2 dataset.
 
-\citet{liu2021} proposed Swin Transformer, which constructs hierarchical representations using self-attention within local windows.
-The shifted-window mechanism enables information exchange across window boundaries, while the hierarchical architecture supports feature
-representation at multiple spatial scales. Swin-Tiny is included to examine whether this attention structure offers advantages over the global
-attention employed by DeiT-Small for the selected classification task.
+\citet{yagis2021} studied Alzheimer's and Parkinson's MRI classification and showed that slice-level splitting can inflate accuracy relative to subject-level 
+separation when related slices cross partitions. This supports explicit duplicate checks and cautious interpretation of generalization, without assuming that 
+duplicate removal establishes patient independence. Our study will, therefore, compare classification performance and computational cost under a shared, audited,
+reproducible protocol.
 
 \section*{Proposed Work}
 \setlength{\emergencystretch}{2em}
@@ -118,6 +116,10 @@ same hardware, input resolution, and numerical precision, with a common training
 \renewcommand{\bibsection}{\section*{References}}
 \begin{thebibliography}{}
 
+\bibitem[Cakmak and Pacal(2025)]{cakmak2025}
+Cakmak, Y., \& Pacal, I. (2025). Comparative analysis of transformer architectures for brain tumor classification.
+Exploration of Medicine, 6, 1001377. \url{https://doi.org/10.37349/emed.2025.1001377}
+
 \bibitem[He et~al.(2016)]{he2016}
 He, K., Zhang, X., Ren, S., \& Sun, J. (2016). Deep residual learning for image recognition.
 In 2016 IEEE Conference on Computer Vision and Pattern Recognition (CVPR) (pp. 770--778).
@@ -135,6 +137,11 @@ Deep multi-scale 3D convolutional neural network (CNN) for MRI gliomas brain tum
 Journal of Digital Imaging, 33(4), 903--915.
 \url{https://doi.org/10.1007/s10278-020-00347-9}
 
+\bibitem[Reddy et~al.(2024)]{reddy2024}
+Reddy, C. K. K., Reddy, P. A., Janapati, H., Assiri, B., Shuaib, M., Alam, S., \& Sheneamer, A. (2024).
+A fine-tuned vision transformer based enhanced multi-class brain tumor classification using MRI scan imagery.
+Frontiers in Oncology, 14, 1400341. \url{https://doi.org/10.3389/fonc.2024.1400341}
+
 \bibitem[Tan and Le(2019)]{tan2019}
 Tan, M., \& Le, Q. V. (2019). EfficientNet: Rethinking model scaling for convolutional neural networks.
 In K. Chaudhuri \& R. Salakhutdinov (Eds.), Proceedings of the 36th International Conference on Machine Learning
@@ -145,6 +152,11 @@ Touvron, H., Cord, M., Douze, M., Massa, F., Sablayrolles, A., \& J\'egou, H. (2
 Training data-efficient image transformers \& distillation through attention.
 In M. Meila \& T. Zhang (Eds.), Proceedings of the 38th International Conference on Machine Learning
 (Vol. 139, pp. 10347--10357). PMLR. \url{https://proceedings.mlr.press/v139/touvron21a.html}
+
+\bibitem[Yagis et~al.(2021)]{yagis2021}
+Yagis, E., Atnafu, S. W., Garc{\'i}a Seco de Herrera, A., Marzi, C., Scheda, R., Giannelli, M., Tessa, C., Citi, L.,
+\& Diciotti, S. (2021). Effect of data leakage in brain MRI classification using 2D convolutional neural networks.
+Scientific Reports, 11, 22544. \url{https://doi.org/10.1038/s41598-021-01681-w}
 
 \end{thebibliography}
 \endgroup
